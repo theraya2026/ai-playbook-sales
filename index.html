@@ -712,7 +712,7 @@
     line-height: 1.7;
     padding: 0 24px;
   }
-  .faq-item.open .faq-a { max-height: 200px; padding: 0 24px 20px; }
+  .faq-item.open .faq-a { max-height: 500px; padding: 0 24px 20px; }
 
   /* ── Footer ─────────────────────────────────────────────────── */
   footer {
@@ -1222,14 +1222,28 @@
   reveals.forEach(r => observer.observe(r));
 
   // ── FAQ accordion ──────────────────────────────────────────────
-  document.querySelectorAll('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      const item = q.parentElement;
-      const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
+  function initFAQ() {
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.style.cursor = 'pointer';
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          const a = i.querySelector('.faq-a');
+          if (a) a.style.maxHeight = '0';
+        });
+        if (!wasOpen) {
+          item.classList.add('open');
+          const a = item.querySelector('.faq-a');
+          if (a) a.style.maxHeight = a.scrollHeight + 'px';
+        }
+      });
     });
-  });
+  }
+  document.addEventListener('DOMContentLoaded', initFAQ);
+  // Also run immediately in case DOM already loaded
+  if (document.readyState !== 'loading') initFAQ();
 
   // ── Handlers (wire to Stripe later) ───────────────────────────
   function handlePurchase() {

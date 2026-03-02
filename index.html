@@ -4,17 +4,1240 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI for Small Business — The Complete Playbook</title>
-<script>
-function handlePurchase() {
-  window.location.href = 'https://buy.stripe.com/28EdR28Jv7Hv6ju02f5J600';
-}
-</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Variables ─────────────────────────────────────────────── */
+  :root {
+    --bg:        #0a0a0a;
+    --bg2:       #111111;
+    --bg3:       #1a1a1a;
+    --fg:        #f0ede8;
+    --fg2:       #a09a92;
+    --orange:    #ff6b1a;
+    --orange2:   #ff8c45;
+    --orange-glow: rgba(255,107,26,0.15);
+    --white:     #ffffff;
+    --border:    rgba(255,107,26,0.2);
+    --border2:   rgba(255,255,255,0.08);
+    --radius:    4px;
+    --font-head: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+  [data-theme="light"] {
+    --bg:        #f5f2ee;
+    --bg2:       #edeae5;
+    --bg3:       #e5e1da;
+    --fg:        #1a1612;
+    --fg2:       #5a534a;
+    --orange-glow: rgba(255,107,26,0.08);
+    --border:    rgba(255,107,26,0.3);
+    --border2:   rgba(0,0,0,0.08);
+  }
+
+  /* ── Reset ─────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  /* ── Noise texture overlay ──────────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  /* ── Utility ────────────────────────────────────────────────── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .orange { color: var(--orange); }
+  .mono { font-family: var(--font-mono); font-size: 0.85em; }
+
+  /* ── Nav ────────────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border2);
+    transition: background 0.3s;
+  }
+  [data-theme="light"] nav { background: rgba(245,242,238,0.9); }
+  .nav-logo {
+    font-family: var(--font-head);
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--orange);
+  }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .theme-toggle {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--fg);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .theme-toggle:hover { border-color: var(--orange); transform: rotate(20deg); }
+  .nav-cta {
+    background: var(--orange);
+    color: #000;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--orange2); transform: translateY(-1px); }
+
+  /* ── Hero ───────────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--border2) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border2) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 60px;
+    align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--orange-glow);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--orange);
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero-title {
+    font-family: var(--font-head);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-title .line2 { color: var(--orange); display: block; }
+  .hero-title .line3 {
+    -webkit-text-stroke: 1px var(--fg);
+    color: transparent;
+    display: block;
+  }
+  [data-theme="light"] .hero-title .line3 { -webkit-text-stroke: 1px var(--fg); }
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 1.15rem;
+    color: var(--fg2);
+    max-width: 500px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-stats {
+    display: flex; gap: 32px;
+    margin-top: 32px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .stat { border-left: 2px solid var(--orange); padding-left: 14px; }
+  .stat-num {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--fg2); margin-top: 2px; }
+  .hero-actions {
+    display: flex; gap: 14px; align-items: center;
+    margin-top: 36px;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .btn-primary {
+    background: var(--orange);
+    color: #000;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 16px 32px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.4s;
+  }
+  .btn-primary:hover { background: var(--orange2); transform: translateY(-2px); box-shadow: 0 8px 30px var(--orange-glow); }
+  .btn-primary:hover::after { transform: translateX(100%); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--fg);
+    font-size: 0.95rem;
+    padding: 16px 24px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ── Hero Book Visual ───────────────────────────────────────── */
+  .hero-visual { animation: fadeUp 0.6s 0.2s ease both; }
+  .book-mockup {
+    background: linear-gradient(135deg, #1a1612 0%, #2a2018 100%);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 40px 32px;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px var(--border);
+    transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+    transition: transform 0.4s ease;
+  }
+  [data-theme="light"] .book-mockup { background: linear-gradient(135deg, #2a2018 0%, #3a2c1c 100%); }
+  .book-mockup:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg); }
+  .book-stripe {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 8px;
+    background: var(--orange);
+    border-radius: 8px 0 0 8px;
+  }
+  .book-edition {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--orange);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+  .book-title-mock {
+    font-family: var(--font-head);
+    font-size: 2.2rem;
+    color: #f0ede8;
+    line-height: 1;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .book-subtitle-mock {
+    font-family: var(--font-head);
+    font-size: 1.1rem;
+    color: var(--orange);
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  .book-contents {
+    display: flex; flex-direction: column; gap: 8px;
+    border-top: 1px solid rgba(255,107,26,0.2);
+    padding-top: 20px;
+  }
+  .book-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.8rem;
+    color: rgba(240,237,232,0.7);
+  }
+  .book-item::before {
+    content: '';
+    width: 16px; height: 1px;
+    background: var(--orange);
+    flex-shrink: 0;
+  }
+  .book-price-tag {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,107,26,0.2);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .book-price {
+    font-family: var(--font-head);
+    font-size: 2.8rem;
+    color: var(--orange);
+  }
+  .book-price-was {
+    font-size: 0.9rem;
+    color: rgba(240,237,232,0.4);
+    text-decoration: line-through;
+  }
+
+  /* ── Sales counter ──────────────────────────────────────────── */
+  .sales-ticker {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 20px;
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 20px;
+    font-size: 0.85rem;
+  }
+  .ticker-dot {
+    width: 8px; height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  .ticker-count {
+    font-family: var(--font-mono);
+    color: var(--orange);
+    font-weight: 700;
+  }
+
+  /* ── Animations ─────────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── Marquee ────────────────────────────────────────────────── */
+  .marquee-wrap {
+    background: var(--orange);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+    gap: 0;
+  }
+  .marquee-item {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: #000;
+    padding: 0 40px;
+  }
+  .marquee-sep { color: rgba(0,0,0,0.4); }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── Pain points ────────────────────────────────────────────── */
+  .section { padding: 100px 0; }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--orange);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .section-sub { color: var(--fg2); max-width: 560px; font-size: 1.05rem; }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+    border: 1px solid var(--border2);
+  }
+  .pain-card {
+    background: var(--bg2);
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+  .pain-card:hover { background: var(--bg3); }
+  .pain-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .pain-card:hover::before { transform: scaleX(1); }
+  .pain-num {
+    font-family: var(--font-head);
+    font-size: 4rem;
+    color: var(--border2);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .pain-card:hover .pain-num { color: var(--orange-glow); }
+  .pain-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; }
+  .pain-text { color: var(--fg2); font-size: 0.95rem; line-height: 1.6; }
+
+  /* ── What's inside ──────────────────────────────────────────── */
+  .inside-section { background: var(--bg2); }
+  .chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 60px;
+  }
+  .chapter-card {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    padding: 24px;
+    border-radius: var(--radius);
+    display: flex; gap: 20px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  [data-theme="light"] .chapter-card { background: var(--bg3); }
+  .chapter-card:hover { border-color: var(--orange); transform: translateX(4px); }
+  .chapter-num {
+    font-family: var(--font-head);
+    font-size: 2.2rem;
+    color: var(--orange);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 48px;
+  }
+  .chapter-title { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+  .chapter-desc { color: var(--fg2); font-size: 0.88rem; line-height: 1.5; }
+
+  .extras-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .extra-card {
+    background: var(--orange-glow);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: var(--radius);
+    text-align: center;
+  }
+  .extra-icon { font-size: 2rem; margin-bottom: 10px; }
+  .extra-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+  .extra-desc { color: var(--fg2); font-size: 0.8rem; }
+
+  /* ── Case Study Preview ─────────────────────────────────────── */
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 60px;
+  }
+  .result-card {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .result-card:hover { transform: translateY(-4px); border-color: var(--orange); }
+  .result-header {
+    background: linear-gradient(135deg, #1a1612, #2a2018);
+    padding: 20px;
+    border-bottom: 2px solid var(--orange);
+  }
+  .result-biz { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+  .result-type { color: var(--fg2); font-size: 0.85rem; }
+  .result-body { padding: 20px; }
+  .result-metric {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border2);
+    font-size: 0.88rem;
+  }
+  .result-metric:last-child { border-bottom: none; }
+  .result-change {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: #22c55e;
+    font-weight: 700;
+  }
+
+  /* ── Prompt preview ─────────────────────────────────────────── */
+  .prompts-section { background: var(--bg2); }
+  .prompt-preview {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 48px;
+  }
+  [data-theme="light"] .prompt-preview { background: var(--bg3); }
+  .prompt-header {
+    background: var(--bg3);
+    padding: 12px 20px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border2);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--fg2);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #ffbd2e; }
+  .dot-g { background: #28ca41; }
+  .prompts-list { padding: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .prompt-item {
+    padding: 16px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    transition: border-color 0.2s;
+    cursor: default;
+  }
+  .prompt-item:hover { border-color: var(--orange); }
+  .prompt-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--orange);
+    margin-bottom: 6px;
+  }
+  .prompt-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+  .prompt-preview-text { color: var(--fg2); font-size: 0.8rem; line-height: 1.5; }
+  .prompt-locked {
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px;
+    font-size: 0.75rem; color: var(--fg2);
+    padding: 8px;
+    grid-column: 1 / -1;
+    border: 1px dashed var(--border2);
+    border-radius: var(--radius);
+  }
+
+  /* ── Free chapter ───────────────────────────────────────────── */
+  .free-section {
+    background: linear-gradient(135deg, var(--bg2), var(--bg3));
+    border-top: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
+  }
+  .free-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .free-list { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .free-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 0.95rem;
+  }
+  .free-check {
+    width: 20px; height: 20px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    color: #000;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .opt-in-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+  }
+  [data-theme="light"] .opt-in-box { background: var(--bg2); }
+  .opt-in-title {
+    font-family: var(--font-head);
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .opt-in-sub { color: var(--fg2); font-size: 0.9rem; margin-bottom: 24px; }
+  .opt-in-form { display: flex; flex-direction: column; gap: 12px; }
+  .opt-in-input {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .opt-in-input:focus { border-color: var(--orange); }
+  .opt-in-input::placeholder { color: var(--fg2); }
+  .opt-in-btn {
+    background: var(--orange);
+    color: #000;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 15px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+  }
+  .opt-in-btn:hover { background: var(--orange2); transform: translateY(-1px); }
+  .opt-in-disclaimer { font-size: 0.75rem; color: var(--fg2); text-align: center; }
+
+  /* ── Pricing ────────────────────────────────────────────────── */
+  .pricing-card {
+    max-width: 540px; margin: 60px auto 0;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+  }
+  .pricing-header {
+    background: linear-gradient(135deg, #1a1612, #2a2018);
+    padding: 32px;
+    text-align: center;
+    border-bottom: 2px solid var(--orange);
+  }
+  .pricing-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--orange);
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+  .pricing-price {
+    font-family: var(--font-head);
+    font-size: 5rem;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .pricing-price span { font-size: 2rem; vertical-align: super; }
+  .pricing-was { color: var(--fg2); font-size: 0.9rem; text-decoration: line-through; margin-top: 4px; }
+  .pricing-body { padding: 32px; }
+  .pricing-feature {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border2);
+    font-size: 0.95rem;
+  }
+  .pricing-feature:last-child { border-bottom: none; }
+  .pricing-feature-icon { color: var(--orange); flex-shrink: 0; margin-top: 2px; }
+  .pricing-cta {
+    padding: 0 32px 32px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .guarantee {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.85rem;
+    color: var(--fg2);
+    padding: 14px;
+    background: var(--orange-glow);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  /* ── FAQ ────────────────────────────────────────────────────── */
+  .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; }
+  .faq-item {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .faq-q {
+    padding: 20px 24px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: color 0.2s;
+    user-select: none;
+  }
+  .faq-q:hover { color: var(--orange); }
+  .faq-icon { color: var(--orange); font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    color: var(--fg2);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    padding: 0 24px;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 24px 20px; }
+
+  /* ── Footer ─────────────────────────────────────────────────── */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border2);
+    padding: 40px 0;
+    text-align: center;
+    color: var(--fg2);
+    font-size: 0.85rem;
+  }
+  .footer-logo {
+    font-family: var(--font-head);
+    font-size: 1.6rem;
+    color: var(--orange);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 16px; }
+  .footer-links a { color: var(--fg2); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--orange); }
+
+  /* ── Responsive ─────────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .pain-grid { grid-template-columns: 1fr; }
+    .chapters-grid { grid-template-columns: 1fr; }
+    .extras-grid { grid-template-columns: repeat(2, 1fr); }
+    .results-grid { grid-template-columns: 1fr; }
+    .free-inner { grid-template-columns: 1fr; }
+    .prompts-list { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
-<body style="background:#0a0a0a;color:#f0ede8;font-family:sans-serif;text-align:center;padding:60px 20px;">
-<h1 style="font-size:3rem;color:#ff6b1a;">AI FOR SMALL BUSINESS</h1>
-<h2 style="color:#fff;margin:10px 0;">The Complete Playbook — 2026</h2>
-<p style="color:#aaa;max-width:500px;margin:20px auto;">7 chapters, 3 case studies, 15 prompt templates, 4 worksheets. Everything you need to save 10+ hours a week using AI.</p>
-<button onclick="handlePurchase()" style="background:#ff6b1a;color:#000;font-size:1.2rem;font-weight:bold;padding:18px 40px;border:none;border-radius:4px;cursor:pointer;margin-top:30px;">GET INSTANT ACCESS — $29.99</button>
-<p style="color:#666;margin-top:16px;font-size:0.85rem;">Instant download · 30-day money-back guarantee</p>
-</body>
-</html>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AI PLAYBOOK</div>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme">☀️</button>
+    <a href="#pricing" class="nav-cta">GET THE GUIDE →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge">NEW 2026 EDITION — FULLY UPDATED</div>
+        <h1 class="hero-title">
+          AI FOR
+          <span class="line2">SMALL</span>
+          <span class="line3">BUSINESS</span>
+        </h1>
+        <p class="hero-sub">The complete step-by-step playbook for using AI to save time, create more content, automate your workflows, and grow revenue — without a tech team.</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num">7</div>
+            <div class="stat-label">Chapters</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">15</div>
+            <div class="stat-label">Prompt Templates</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Case Studies</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">4</div>
+            <div class="stat-label">Worksheets</div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn-primary">GET INSTANT ACCESS — $29.99</a>
+          <a href="#free" class="btn-secondary">Get Free Chapter →</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="book-mockup">
+          <div class="book-stripe"></div>
+          <div class="book-edition">2026 EDITION</div>
+          <div class="book-title-mock">AI FOR<br>SMALL BIZ</div>
+          <div class="book-subtitle-mock">THE COMPLETE PLAYBOOK</div>
+          <div class="book-contents">
+            <div class="book-item">7 Chapter Deep-Dives</div>
+            <div class="book-item">3 Real Case Studies</div>
+            <div class="book-item">15 Prompt Templates</div>
+            <div class="book-item">4 Printable Worksheets</div>
+            <div class="book-item">30-Day Roadmap</div>
+            <div class="book-item">Tool Comparison Tables</div>
+          </div>
+          <div class="book-price-tag">
+            <div class="book-price">$29.99</div>
+            <div class="book-price-was">$79.99</div>
+          </div>
+        </div>
+        <div class="sales-ticker">
+          <div class="ticker-dot"></div>
+          <span><span class="ticker-count" id="salesCount">247</span> copies sold this week</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-item">SAVE 10+ HOURS PER WEEK <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">AUTOMATE YOUR WORKFLOWS <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">CREATE CONTENT AT SCALE <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">GROW WITHOUT HIRING <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">NO TECH BACKGROUND NEEDED <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">SAVE 10+ HOURS PER WEEK <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">AUTOMATE YOUR WORKFLOWS <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">CREATE CONTENT AT SCALE <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">GROW WITHOUT HIRING <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">NO TECH BACKGROUND NEEDED <span class="marquee-sep">✦</span></span>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">THE PROBLEM</div>
+      <h2 class="section-title">Sound familiar?</h2>
+      <p class="section-sub">Most small business owners know AI could help — but don't know where to start or what's actually worth paying for.</p>
+    </div>
+    <div class="pain-grid reveal">
+      <div class="pain-card">
+        <div class="pain-num">01</div>
+        <div class="pain-title">You're drowning in repetitive tasks</div>
+        <div class="pain-text">Writing the same emails, creating the same social posts, doing the same admin — week after week. There has to be a better way.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">02</div>
+        <div class="pain-title">You can't afford a full marketing team</div>
+        <div class="pain-text">Copywriters, designers, social media managers — they cost $3,000–$8,000 a month. AI gives you the same output for under $100.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">03</div>
+        <div class="pain-title">The AI landscape is overwhelming</div>
+        <div class="pain-text">New tools launch every week. You've tried ChatGPT but don't know what else to use, what to pay for, or how to connect it all together.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section class="section inside-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">WHAT'S INSIDE</div>
+      <h2 class="section-title">Everything you need.<br><span class="orange">Nothing you don't.</span></h2>
+    </div>
+    <div class="chapters-grid reveal">
+      <div class="chapter-card">
+        <div class="chapter-num">1</div>
+        <div>
+          <div class="chapter-title">Why AI Is Your Biggest Competitive Advantage</div>
+          <div class="chapter-desc">The business case for AI in plain English. The 4 biggest opportunities and how to prioritise them.</div>
+        </div>
+      </div>
+      <div class="chapter-card">
+        <div class="chapter-num">2</div>
+        <div>
+          <div class="chapter-title">ChatGPT & OpenAI — Your New Business Brain</div>
+          <div class="chapter-desc">10 business use cases with exact prompts. Plans, pricing, and pro tips for better results.</div>
+        </div>
+      </div>
+      <div class="chapter-card">
+        <div class="chapter-num">3</div>
+        <div>
+          <div class="chapter-title">Content & Design — Jasper, Canva AI & Copy.ai</div>
+          <div class="chapter-desc">Produce agency-quality content and design in-house. Real workflows and time-saving templates.</div>
+        </div>
+      </div>
+      <div class="chapter-card">
+        <div class="chapter-num">4</div>
+        <div>
+          <div class="chapter-title">Automation — Zapier, Make.com & No-Code Workflows</div>
+          <div class="chapter-desc">5 automation diagrams you can copy today. Connect your apps and eliminate repetitive tasks forever.</div>
+        </div>
+      </div>
+      <div class="chapter-card">
+        <div class="chapter-num">5</div>
+        <div>
+          <div class="chapter-title">Organise Everything — Notion AI</div>
+          <div class="chapter-desc">Build your Business Operating System. CRM, projects, SOPs, and meeting notes — all in one place.</div>
+        </div>
+      </div>
+      <div class="chapter-card">
+        <div class="chapter-num">6</div>
+        <div>
+          <div class="chapter-title">Social Media on Autopilot</div>
+          <div class="chapter-desc">Buffer, Later & Hootsuite compared. Schedule a month of content in one Sunday morning session.</div>
+        </div>
+      </div>
+      <div class="chapter-card">
+        <div class="chapter-num">7</div>
+        <div>
+          <div class="chapter-title">Your 30-Day AI Roadmap</div>
+          <div class="chapter-desc">A day-by-day implementation plan. Week 1 through Week 4 with specific actions and milestones.</div>
+        </div>
+      </div>
+      <div class="chapter-card" style="border-color: var(--border);">
+        <div class="chapter-num" style="color: var(--orange);">+</div>
+        <div>
+          <div class="chapter-title" style="color: var(--orange);">Bonus: Automation Diagrams, Prompts & Worksheets</div>
+          <div class="chapter-desc">5 visual workflow diagrams, 15 prompt templates, and 4 printable worksheets included.</div>
+        </div>
+      </div>
+    </div>
+    <div class="extras-grid reveal" style="margin-top: 24px;">
+      <div class="extra-card">
+        <div class="extra-icon">📊</div>
+        <div class="extra-title">3 Case Studies</div>
+        <div class="extra-desc">Composite examples with real metrics and results</div>
+      </div>
+      <div class="extra-card">
+        <div class="extra-icon">💬</div>
+        <div class="extra-title">15 Prompts</div>
+        <div class="extra-desc">Fill-in-the-blank templates ready to use today</div>
+      </div>
+      <div class="extra-card">
+        <div class="extra-icon">📋</div>
+        <div class="extra-title">4 Worksheets</div>
+        <div class="extra-desc">Printable implementation and ROI trackers</div>
+      </div>
+      <div class="extra-card">
+        <div class="extra-icon">🗺️</div>
+        <div class="extra-title">30-Day Plan</div>
+        <div class="extra-desc">Day-by-day roadmap to full implementation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS PREVIEW -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">CASE STUDY PREVIEW</div>
+      <h2 class="section-title">What AI can do for<br><span class="orange">your business.</span></h2>
+      <p class="section-sub">These are illustrative examples based on typical outcomes. Full case studies with workflows and breakdowns inside the guide.</p>
+    </div>
+    <div class="results-grid reveal">
+      <div class="result-card">
+        <div class="result-header">
+          <div class="result-biz">Sarah's Artisan Coffee</div>
+          <div class="result-type">Independent Coffee Shop · Portland, OR</div>
+        </div>
+        <div class="result-body">
+          <div class="result-metric"><span>Weekly marketing hours</span><span class="result-change">18h → 4h ↓78%</span></div>
+          <div class="result-metric"><span>Instagram posts/month</span><span class="result-change">6 → 28 ↑367%</span></div>
+          <div class="result-metric"><span>Monthly revenue</span><span class="result-change">↑23% in 90 days</span></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-header">
+          <div class="result-biz">Marcus's Home Goods</div>
+          <div class="result-type">E-Commerce Retailer · Atlanta, GA</div>
+        </div>
+        <div class="result-body">
+          <div class="result-metric"><span>Product description time</span><span class="result-change">45min → 4min ↓91%</span></div>
+          <div class="result-metric"><span>Store conversion rate</span><span class="result-change">1.8% → 2.4% ↑33%</span></div>
+          <div class="result-metric"><span>Monthly revenue</span><span class="result-change">↑62% in 60 days</span></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-header">
+          <div class="result-biz">Chen & Associates</div>
+          <div class="result-type">Accounting Practice · Chicago, IL</div>
+        </div>
+        <div class="result-body">
+          <div class="result-metric"><span>Daily writing time</span><span class="result-change">3hrs → 45min ↓75%</span></div>
+          <div class="result-metric"><span>LinkedIn followers</span><span class="result-change">180 → 620 ↑244%</span></div>
+          <div class="result-metric"><span>New clients in 60 days</span><span class="result-change">8 new clients</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMPT PREVIEW -->
+<section class="section prompts-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">PROMPT LIBRARY PREVIEW</div>
+      <h2 class="section-title">15 prompts.<br><span class="orange">Ready to copy.</span></h2>
+      <p class="section-sub">Each prompt is fill-in-the-blank. Replace the brackets with your business details and get professional results in seconds.</p>
+    </div>
+    <div class="prompt-preview reveal">
+      <div class="prompt-header">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span style="margin-left: 8px;">prompt-library.txt — 15 prompts included</span>
+      </div>
+      <div class="prompts-list">
+        <div class="prompt-item">
+          <div class="prompt-tag">WRITING & CONTENT</div>
+          <div class="prompt-title">Write a Customer Welcome Email</div>
+          <div class="prompt-preview-text">"You are an expert email copywriter. Write a warm, professional welcome email for a new customer of [YOUR BUSINESS TYPE]..."</div>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-tag">WRITING & CONTENT</div>
+          <div class="prompt-title">Create a Month of Social Posts</div>
+          <div class="prompt-preview-text">"You are a social media manager for [BUSINESS NAME]. Create 20 posts for [PLATFORM]. Our brand voice is [ADJECTIVES]..."</div>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-tag">STRATEGY & BUSINESS</div>
+          <div class="prompt-title">Create a 90-Day Business Plan</div>
+          <div class="prompt-preview-text">"You are a business consultant specialising in [INDUSTRY]. Create a detailed 90-day action plan for [SPECIFIC GOAL]..."</div>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-tag">CUSTOMER SERVICE</div>
+          <div class="prompt-title">Handle a Difficult Complaint</div>
+          <div class="prompt-preview-text">"You are an expert customer service manager. Write a professional response to: [PASTE COMPLAINT HERE]..."</div>
+        </div>
+        <div class="prompt-locked">🔒 11 more prompts unlocked in the full guide</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE CHAPTER -->
+<section class="section free-section" id="free">
+  <div class="container">
+    <div class="free-inner">
+      <div class="reveal">
+        <div class="section-label">FREE CHAPTER</div>
+        <h2 class="section-title">Try before<br><span class="orange">you buy.</span></h2>
+        <p style="color: var(--fg2); margin-top: 16px;">Get Chapter 1 completely free. No credit card. No catch. Just enter your email and we'll send it straight to your inbox.</p>
+        <div class="free-list">
+          <div class="free-item"><div class="free-check">✓</div><span>Why AI is transforming small business right now</span></div>
+          <div class="free-item"><div class="free-check">✓</div><span>The 4 biggest AI opportunities for your business</span></div>
+          <div class="free-item"><div class="free-check">✓</div><span>A quick map of every major AI tool category</span></div>
+          <div class="free-item"><div class="free-check">✓</div><span>How to get started in under 30 minutes</span></div>
+        </div>
+      </div>
+      <div class="opt-in-box reveal">
+        <div class="opt-in-title">GET CHAPTER 1 FREE</div>
+        <div class="opt-in-sub">Instant delivery to your inbox. No spam, ever.</div>
+        <form class="opt-in-form" onsubmit="handleFreeSignup(event)">
+          <input type="text" class="opt-in-input" placeholder="Your first name" required>
+          <input type="email" class="opt-in-input" placeholder="Your email address" required>
+          <button type="submit" class="opt-in-btn">SEND ME THE FREE CHAPTER →</button>
+        </form>
+        <p class="opt-in-disclaimer" style="margin-top: 12px;">We respect your privacy. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="reveal" style="text-align: center;">
+      <div class="section-label">PRICING</div>
+      <h2 class="section-title">One price.<br><span class="orange">Lifetime access.</span></h2>
+      <p class="section-sub" style="margin: 0 auto;">No subscription. No upsells. Buy once, own it forever. Includes all future updates.</p>
+    </div>
+    <div class="pricing-card reveal">
+      <div class="pricing-header">
+        <div class="pricing-label">COMPLETE PLAYBOOK — FULL EDITION 2026</div>
+        <div class="pricing-price"><span>$</span>29.99</div>
+        <div class="pricing-was">Regular price $79.99</div>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span>7 complete chapters covering every major AI tool</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span>3 illustrated case studies with before/after metrics</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span>15 fill-in-the-blank prompt templates (use today)</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span>4 printable implementation worksheets</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span>5 automation workflow diagrams</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span>30-day step-by-step implementation roadmap</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span>Instant PDF download — read on any device</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span>All future updates included free</span></div>
+      </div>
+      <div class="pricing-cta">
+        <button class="btn-primary" style="font-size: 1.1rem; padding: 18px;" onclick="handlePurchase()">
+          GET INSTANT ACCESS — $29.99 →
+        </button>
+        <div class="guarantee">
+          <span>🛡️</span>
+          <span><strong>30-day money-back guarantee.</strong> If you don't find at least 10 hours of time savings in the first month, we'll refund you — no questions asked.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background: var(--bg2);">
+  <div class="container" style="max-width: 720px;">
+    <div class="reveal" style="text-align: center;">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Common questions.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q">Do I need a technical background to use this guide? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Absolutely not. This guide is written for business owners, not developers. If you can use email and a smartphone, you can implement everything in this guide. No coding. No IT department required.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How is this different from free AI content online? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Most free content is generic, theoretical, or written for tech audiences. This guide is specifically built for small business owners with practical use cases, real cost comparisons, and a structured implementation plan you can start today.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How long will it take to see results? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Most readers save time from day one. The prompt templates alone will save you hours in your first week. The 30-day roadmap is designed to show measurable ROI within the first month.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What format is the guide delivered in? <span class="faq-icon">+</span></div>
+        <div class="faq-a">The guide is a beautifully formatted PDF delivered instantly after purchase. You can read it on any device — phone, tablet, or computer — and print the worksheets as needed.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I'm not satisfied? <span class="faq-icon">+</span></div>
+        <div class="faq-a">We offer a full 30-day money-back guarantee. If you don't find at least 10 hours of time savings in your first month of implementing the strategies, contact us for a complete refund — no questions asked.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section" style="text-align: center; background: linear-gradient(135deg, #0a0a0a, #1a1200);">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">GET STARTED TODAY</div>
+      <h2 class="section-title" style="font-size: clamp(3rem, 7vw, 6rem);">
+        STOP DOING IT<br><span class="orange">THE HARD WAY.</span>
+      </h2>
+      <p style="color: var(--fg2); max-width: 500px; margin: 20px auto 40px; font-size: 1.05rem;">
+        Every week you wait is another week of unnecessary admin, missed content, and lost revenue. The guide is $29.99. The cost of not reading it is much higher.
+      </p>
+      <button class="btn-primary" style="font-size: 1.1rem; padding: 20px 48px;" onclick="handlePurchase()">
+        GET THE COMPLETE PLAYBOOK — $29.99 →
+      </button>
+      <p style="color: var(--fg2); font-size: 0.85rem; margin-top: 16px;">
+        Instant download · 30-day guarantee · Lifetime access
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">AI PLAYBOOK</div>
+    <p>The complete guide to AI for small business owners.</p>
+    <div class="footer-links">
+      <a href="#free">Free Chapter</a>
+      <a href="#pricing">Pricing</a>
+      <a href="/cdn-cgi/l/email-protection#2d7462787f0068606c6461034e4240">Contact</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+    </div>
+    <p style="margin-top: 20px; font-size: 0.75rem; color: var(--fg2);">
+      © 2026 AI Playbook. All rights reserved.<br>
+      Case studies are illustrative composite examples. Results are not guaranteed.
+    </p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── Theme toggle ───────────────────────────────────────────────
+  const toggle = document.getElementById('themeToggle');
+  const html   = document.documentElement;
+  let dark = true;
+  toggle.addEventListener('click', () => {
+    dark = !dark;
+    html.setAttribute('data-theme', dark ? 'dark' : 'light');
+    toggle.textContent = dark ? '☀️' : '🌙';
+  });
+
+  // ── Live sales counter ─────────────────────────────────────────
+  let count = 247;
+  const counterEl = document.getElementById('salesCount');
+  function tickCounter() {
+    if (Math.random() < 0.3) {
+      count += Math.floor(Math.random() * 3) + 1;
+      counterEl.style.transform = 'scale(1.2)';
+      counterEl.style.transition = 'transform 0.2s';
+      counterEl.textContent = count;
+      setTimeout(() => { counterEl.style.transform = 'scale(1)'; }, 200);
+    }
+    setTimeout(tickCounter, Math.random() * 8000 + 4000);
+  }
+  tickCounter();
+
+  // ── Scroll reveal ──────────────────────────────────────────────
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // ── FAQ accordion ──────────────────────────────────────────────
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // ── Handlers (wire to Stripe later) ───────────────────────────
+  function handlePurchase() {
+    window.location.href='https://buy.stripe.com/28EdR28Jv7Hv6ju02f5J600';
+  }
+  function handleFreeSignup(e) {
+    e.preventDefault();
+    alert('Email capture coming soon! Connect to your email service here.');
+  }
+
+  // ── Marquee duplicate for seamless loop ─────────────

@@ -705,14 +705,13 @@
   .faq-icon { color: var(--orange); font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; }
   .faq-item.open .faq-icon { transform: rotate(45deg); }
   .faq-a {
-    max-height: 0; overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.3s ease;
+    display: none;
     color: var(--fg2);
     font-size: 0.95rem;
     line-height: 1.7;
-    padding: 0 24px;
+    padding: 0 24px 20px;
   }
-  .faq-item.open .faq-a { max-height: 500px; padding: 0 24px 20px; }
+  .faq-item.open .faq-a { display: block; }
 
   /* ── Footer ─────────────────────────────────────────────────── */
   footer {
@@ -1222,28 +1221,14 @@
   reveals.forEach(r => observer.observe(r));
 
   // ── FAQ accordion ──────────────────────────────────────────────
-  function initFAQ() {
-    document.querySelectorAll('.faq-q').forEach(q => {
-      q.style.cursor = 'pointer';
-      q.addEventListener('click', () => {
-        const item = q.parentElement;
-        const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => {
-          i.classList.remove('open');
-          const a = i.querySelector('.faq-a');
-          if (a) a.style.maxHeight = '0';
-        });
-        if (!wasOpen) {
-          item.classList.add('open');
-          const a = item.querySelector('.faq-a');
-          if (a) a.style.maxHeight = a.scrollHeight + 'px';
-        }
-      });
+  document.querySelectorAll('.faq-q').forEach(function(q) {
+    q.addEventListener('click', function() {
+      var item = q.parentElement;
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
     });
-  }
-  document.addEventListener('DOMContentLoaded', initFAQ);
-  // Also run immediately in case DOM already loaded
-  if (document.readyState !== 'loading') initFAQ();
+  });
 
   // ── Handlers (wire to Stripe later) ───────────────────────────
   function handlePurchase() {

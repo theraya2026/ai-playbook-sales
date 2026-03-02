@@ -1237,7 +1237,14 @@
   }
   function handleFreeSignup(e) {
     e.preventDefault();
-    alert('Email capture coming soon! Connect to your email service here.');
+    const form = e.target;
+    const email = form.querySelector('[type=email]').value;
+    const name = form.querySelector('[type=text]').value;
+    const WEBHOOK = 'YOUR_ZAPIER_WEBHOOK';
+    if (WEBHOOK !== 'YOUR_ZAPIER_WEBHOOK') {
+      fetch(WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, name})});
+    }
+    form.innerHTML = '<div style="text-align:center;padding:20px"><div style="font-size:2.5rem;margin-bottom:12px">\u{1F389}</div><h3 style="color:var(--orange);font-family:var(--font-head);font-size:1.8rem;letter-spacing:1px;margin-bottom:8px">CHECK YOUR INBOX!</h3><p style="color:var(--fg2)">Chapter 1 is on its way to <strong style=\"color:var(--fg)\">' + email + '</strong>.<br>Check your inbox in the next few minutes.</p></div>';
   }
 
   // ── Marquee duplicate for seamless loop ─────────────

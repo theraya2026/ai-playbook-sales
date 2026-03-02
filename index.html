@@ -792,7 +792,7 @@
         </div>
         <div class="hero-actions">
           <a href="https://buy.stripe.com/28EdR28Jv7Hv6ju02f5J600" class="btn-primary">GET INSTANT ACCESS — $29.99</a>
-          <a href="#free" class="btn-secondary" onclick="document.getElementById('free').scrollIntoView({behavior:'smooth'});return false;">Get Free Chapter →</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKZHWIMPTsk4ITlY1XPZoUgtc2iMlVvI-bu9gfX6BcxSTrwg/viewform" target="_blank" class="btn-secondary">Get Free Chapter →</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -1244,7 +1244,8 @@
     if (WEBHOOK !== 'YOUR_ZAPIER_WEBHOOK') {
       fetch(WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, name})});
     }
-    form.innerHTML = '<div style="text-align:center;padding:20px"><div style="font-size:2.5rem;margin-bottom:12px">\u{1F389}</div><h3 style="color:var(--orange);font-family:var(--font-head);font-size:1.8rem;letter-spacing:1px;margin-bottom:8px">CHECK YOUR INBOX!</h3><p style="color:var(--fg2)">Chapter 1 is on its way to <strong style=\"color:var(--fg)\">' + email + '</strong>.<br>Check your inbox in the next few minutes.</p></div>';
+    window.open('https://docs.google.com/forms/d/e/1FAIpQLSfKZHWIMPTsk4ITlY1XPZoUgtc2iMlVvI-bu9gfX6BcxSTrwg/viewform', '_blank');
+    form.innerHTML = '<div style="text-align:center;padding:20px"><div style="font-size:2.5rem;margin-bottom:12px">🎉</div><h3 style="color:var(--orange);font-family:var(--font-head);font-size:1.8rem;letter-spacing:1px;margin-bottom:8px">OPENING FORM...</h3><p style="color:var(--fg2)">Complete the form to get your free chapter sent to your inbox!</p></div>';
   }
 
   // ── Marquee duplicate for seamless loop ─────────────

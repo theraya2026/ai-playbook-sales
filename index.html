@@ -814,8 +814,7 @@
             <div class="book-price-was">$79.99</div>
           </div>
         </div>
-        <div class="sales-ticker">
-          <div class="ticker-dot"></div>
+        
           <span><span class="ticker-count" id="salesCount">247</span> copies sold this week</span>
         </div>
       </div>
@@ -1161,20 +1160,7 @@
     toggle.textContent = dark ? '☀️' : '🌙';
   });
 
-  // ── Live sales counter ─────────────────────────────────────────
-  let count = 247;
-  const counterEl = document.getElementById('salesCount');
-  function tickCounter() {
-    if (Math.random() < 0.3) {
-      count += Math.floor(Math.random() * 3) + 1;
-      counterEl.style.transform = 'scale(1.2)';
-      counterEl.style.transition = 'transform 0.2s';
-      counterEl.textContent = count;
-      setTimeout(() => { counterEl.style.transform = 'scale(1)'; }, 200);
-    }
-    setTimeout(tickCounter, Math.random() * 8000 + 4000);
-  }
-  tickCounter();
+  
 
   // ── Scroll reveal ──────────────────────────────────────────────
   const reveals = document.querySelectorAll('.reveal');

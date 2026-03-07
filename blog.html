@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — AI for Small Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a; --bg2: #111111; --bg3: #1a1a1a;
+    --fg: #f0ede8; --fg2: #a09a92;
+    --orange: #ff6b1a; --orange2: #ff8c45;
+    --orange-glow: rgba(255,107,26,0.15);
+    --border: rgba(255,107,26,0.2);
+    --border2: rgba(255,255,255,0.08);
+    --radius: 4px;
+    --font-head: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: var(--font-body); font-size: 17px;
+    line-height: 1.7; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border2);
+  }
+  .nav-logo {
+    font-family: var(--font-head); font-size: 1.4rem;
+    letter-spacing: 2px; color: var(--orange); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-link {
+    color: var(--fg); text-decoration: none;
+    font-family: var(--font-head); font-size: 1rem; letter-spacing: 2px;
+  }
+  .nav-link:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: #000; padding: 8px 20px;
+    border-radius: var(--radius); text-decoration: none;
+    font-family: var(--font-head); font-size: 0.95rem; letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--orange2); transform: translateY(-1px); }
+
+  .hero {
+    padding: 140px 24px 60px; text-align: center;
+  }
+  .hero h1 {
+    font-family: var(--font-head); font-size: clamp(3rem, 8vw, 5rem);
+    letter-spacing: 4px; line-height: 1.05; margin-bottom: 16px;
+  }
+  .hero p {
+    color: var(--fg2); font-size: 1.1rem; max-width: 600px; margin: 0 auto;
+  }
+
+  .posts {
+    max-width: 800px; margin: 0 auto; padding: 40px 24px 80px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .post-card {
+    display: block; padding: 28px 32px;
+    background: var(--bg2); border: 1px solid var(--border2);
+    border-radius: 8px; text-decoration: none;
+    transition: all 0.25s;
+  }
+  .post-card:hover {
+    border-color: var(--orange); background: var(--bg3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255,107,26,0.1);
+  }
+  .post-card h3 {
+    font-family: var(--font-body); font-size: 1.2rem;
+    font-weight: 500; color: var(--fg); margin-bottom: 8px;
+  }
+  .post-card:hover h3 { color: var(--orange); }
+  .read-more {
+    font-size: 0.85rem; color: var(--fg2);
+    font-family: var(--font-mono); letter-spacing: 0.5px;
+  }
+  .post-card:hover .read-more { color: var(--orange); }
+
+  .cta-section {
+    text-align: center; padding: 60px 24px 80px;
+    border-top: 1px solid var(--border2);
+  }
+  .cta-section h2 {
+    font-family: var(--font-head); font-size: 2.5rem;
+    letter-spacing: 3px; margin-bottom: 12px;
+  }
+  .cta-section p {
+    color: var(--fg2); margin-bottom: 28px; font-size: 1rem;
+  }
+  .cta-btn {
+    display: inline-block; background: var(--orange); color: #000;
+    padding: 16px 40px; border-radius: var(--radius);
+    text-decoration: none; font-family: var(--font-head);
+    font-size: 1.1rem; letter-spacing: 2px;
+    transition: all 0.2s;
+  }
+  .cta-btn:hover {
+    background: var(--orange2); transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255,107,26,0.3);
+  }
+
+  footer {
+    border-top: 1px solid var(--border2);
+    text-align: center; padding: 40px 24px;
+    font-size: 0.85rem; color: var(--fg2);
+  }
+  footer a { color: var(--fg2); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 120px 16px 40px; }
+    .posts { padding: 24px 16px 60px; }
+    .post-card { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">AI PLAYBOOK</a>
+  <div class="nav-links">
+    <a href="/blog.html" class="nav-link">BLOG</a>
+    <a href="https://buy.stripe.com/fZu14gf7Tf9XeQ0cP15J601" class="nav-cta">GET THE GUIDE →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>THE <span style="color:var(--orange)">BLOG</span></h1>
+  <p>Practical AI insights for small business owners. No jargon, no fluff — just strategies you can use today.</p>
+</div>
+
+<div class="posts">
+
+      <a href="/why-ai-saves-small-businesses-money.html" class="post-card">
+        <h3>Why Ai Saves Small Businesses Money</h3>
+        <span class="read-more">Read article →</span>
+      </a>
+      <a href="/ai-chatbots-for-small-business.html" class="post-card">
+        <h3>Ai Chatbots For Small Business</h3>
+        <span class="read-more">Read article →</span>
+      </a>
+      <a href="/ai-chatbors-for-small-biz.html" class="post-card">
+        <h3>Ai Chatbors For Small Biz</h3>
+        <span class="read-more">Read article →</span>
+      </a>
+      <a href="/3-ai-tools-every-small-business-owner-should-try.html" class="post-card">
+        <h3>3 Ai Tools Every Small Business Owner Should Try</h3>
+        <span class="read-more">Read article →</span>
+      </a>
+</div>
+
+<div class="cta-section">
+  <h2>READY TO GO <span style="color:var(--orange)">DEEPER?</span></h2>
+  <p>Get the complete AI Playbook — 7 chapters, 15 prompts, and a 30-day implementation roadmap.</p>
+  <a href="https://buy.stripe.com/fZu14gf7Tf9XeQ0cP15J601" class="cta-btn">GET THE PLAYBOOK — $49.99 →</a>
+</div>
+
+<footer>
+  <p>© 2026 AI Playbook · <a href="/">Home</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+</footer>
+
+</body>
+</html>

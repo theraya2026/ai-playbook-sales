@@ -1203,4 +1203,30 @@
     form.innerHTML = '<div style="text-align:center;padding:20px"><div style="font-size:2.5rem;margin-bottom:12px">🎉</div><h3 style="color:var(--orange);font-family:var(--font-head);font-size:1.8rem;letter-spacing:1px;margin-bottom:8px">OPENING FORM...</h3><p style="color:var(--fg2)">Complete the form to get your free chapter sent to your inbox!</p></div>';
   }
 
-  // ── Marquee duplicate for seamless loop ─────────────
+  // ── Marquee duplicate for seamless loop ─────────────  const marquee = document.getElementById('marquee');
+  if (marquee) {
+    const clone = marquee.cloneNode(true);
+    marquee.parentElement.appendChild(clone);
+  }
+
+  // ── Sales counter animation ────────────────────────────────
+  const salesCountEl = document.getElementById('salesCount');
+  if (salesCountEl) {
+    const target = 247;
+    let current = 200;
+    const interval = setInterval(() => {
+      current += Math.floor(Math.random() * 5) + 1;
+      if (current >= target) {
+        current = target;
+        clearInterval(interval);
+      }
+      salesCountEl.textContent = current;
+    }, 100);
+  }
+</script>
+<script>
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

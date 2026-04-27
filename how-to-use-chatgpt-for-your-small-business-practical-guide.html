@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A practical guide for small business owners on using ChatGPT to save time on emails, content, customer service, and admin — no technical skills needed.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Use ChatGPT for Your Small Business (Practical Guide) | Her Handshake">
+<meta property="og:description" content="A practical guide for small business owners on using ChatGPT to save time on emails, content, customer service, and admin — no technical skills needed.">
+<meta property="og:site_name" content="Her Handshake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@HerHandshake">
+<title>How to Use ChatGPT for Your Small Business (Practical Guide) | AI for Small Business</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLP63PY7QG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PLP63PY7QG');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Use ChatGPT for Your Small Business (Practical Guide)",
+  "description": "A practical guide for small business owners on using ChatGPT to save time on emails, content, customer service, and admin — no technical skills needed.",
+  "datePublished": "April 27, 2026",
+  "author": {"@type": "Organization", "name": "Her Handshake", "url": "https://ai-playbook-sales.vercel.app"},
+  "publisher": {"@type": "Organization", "name": "Her Handshake"},
+  "mainEntityOfPage": {"@type": "WebPage"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a; --bg2: #111111; --bg3: #1a1a1a;
+    --fg: #f0ede8; --fg2: #a09a92;
+    --orange: #ff6b1a; --orange2: #ff8c45;
+    --orange-glow: rgba(255,107,26,0.15);
+    --border: rgba(255,107,26,0.2);
+    --border2: rgba(255,255,255,0.08);
+    --radius: 4px;
+    --font-head: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: var(--font-body); font-size: 17px;
+    line-height: 1.7; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border2);
+  }
+  .nav-logo {
+    font-family: var(--font-head); font-size: 1.4rem;
+    letter-spacing: 2px; color: var(--orange); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-link {
+    color: var(--fg); text-decoration: none;
+    font-family: var(--font-head); font-size: 1rem; letter-spacing: 2px;
+  }
+  .nav-link:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: #000; padding: 8px 20px;
+    border-radius: var(--radius); text-decoration: none;
+    font-family: var(--font-head); font-size: 0.95rem; letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--orange2); transform: translateY(-1px); }
+
+  article {
+    max-width: 720px; margin: 0 auto;
+    padding: 100px 24px 60px;
+  }
+  .breadcrumb {
+    font-size: 0.8rem; color: var(--fg2);
+    margin-bottom: 32px; text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .breadcrumb a { color: var(--orange); text-decoration: none; }
+  .meta {
+    display: inline-block; font-size: 0.75rem; color: var(--orange);
+    text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600;
+    margin-bottom: 20px; padding: 4px 12px;
+    border: 1px solid rgba(255,107,26,0.3); border-radius: 4px;
+  }
+  h1 {
+    font-family: var(--font-head);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    letter-spacing: 2px; line-height: 1.1;
+    margin-bottom: 40px; color: var(--fg);
+  }
+  h2 {
+    font-family: var(--font-head); font-size: 1.8rem;
+    letter-spacing: 1px; margin: 56px 0 20px; color: var(--fg);
+  }
+  h3 {
+    font-family: var(--font-body); font-size: 1.2rem;
+    font-weight: 700; margin: 40px 0 14px; color: var(--fg);
+  }
+  p {
+    margin-bottom: 24px; font-size: 1.05rem;
+    color: var(--fg2); line-height: 1.85;
+  }
+  ul, ol {
+    margin: 0 0 24px 24px; font-size: 1.05rem; color: var(--fg2);
+  }
+  li { margin-bottom: 10px; line-height: 1.7; }
+  strong { font-weight: 700; color: var(--fg); }
+  blockquote {
+    border-left: 3px solid var(--orange); padding: 16px 24px;
+    margin: 32px 0; background: var(--bg3);
+    border-radius: 0 8px 8px 0; font-style: italic; color: var(--fg2);
+  }
+  code {
+    background: var(--bg3); padding: 2px 8px;
+    border-radius: 4px; font-size: 0.9em; color: var(--orange);
+  }
+  hr { border: none; border-top: 1px solid var(--border2); margin: 48px 0; }
+
+  .cta-box {
+    background: var(--bg2); border: 1px solid var(--border2);
+    padding: 48px 36px; border-radius: 12px;
+    margin: 64px 0 0; text-align: center;
+  }
+  .cta-box h3 {
+    font-family: var(--font-head); font-size: 1.8rem;
+    letter-spacing: 2px; margin: 0 0 12px; color: var(--fg);
+  }
+  .cta-box p { color: var(--fg2); margin-bottom: 28px; font-size: 0.95rem; }
+  .cta-btn {
+    display: inline-block; background: var(--orange); color: #000;
+    padding: 16px 40px; border-radius: var(--radius);
+    text-decoration: none; font-family: var(--font-head);
+    font-size: 1.1rem; letter-spacing: 2px; transition: all 0.2s;
+  }
+  .cta-btn:hover {
+    background: var(--orange2); transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255,107,26,0.3);
+  }
+  .cta-guarantee {
+    margin-top: 16px; font-size: 0.8rem; color: var(--fg2);
+  }
+
+  footer {
+    border-top: 1px solid var(--border2);
+    text-align: center; padding: 40px 24px;
+    font-size: 0.85rem; color: var(--fg2);
+  }
+  footer a { color: var(--fg2); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  @media (max-width: 600px) {
+    article { padding: 80px 16px 40px; }
+    .cta-box { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://ai-playbook-sales.vercel.app" class="nav-logo">AI PLAYBOOK</a>
+  <div class="nav-links">
+    <a href="/blog.html" class="nav-link">BLOG</a>
+    <a href="https://buy.stripe.com/fZu14gf7Tf9XeQ0cP15J601" class="nav-cta">GET THE GUIDE &rarr;</a>
+  </div>
+</nav>
+
+<article>
+  <div class="breadcrumb"><a href="https://ai-playbook-sales.vercel.app">Home</a> &nbsp;/&nbsp; <a href="/blog.html">Blog</a></div>
+  <span class="meta">April 27, 2026</span>
+  <h1>How to Use ChatGPT for Your Small Business (Practical Guide)</h1>
+  <pre><code class="language-markdown"># How to Use ChatGPT for Your Small Business (Practical Guide)
+
+If you’ve heard about ChatGPT but aren’t sure what it is or how it can help your small business, you’re in the right place. This guide breaks down everything you need to know—no technical jargon, no fluff—just practical advice you can start using today.
+
+---
+
+## What Is ChatGPT? Explained Simply
+
+ChatGPT is a computer program that can understand and write text like a human. Think of it as a super-smart assistant who can help you write emails, create social media posts, answer customer questions, and much more—instantly.
+
+You don’t need to be a tech expert to use it. You just type what you want it to do (called a “prompt”), and ChatGPT responds with text you can use or edit.
+
+---
+
+## 5 Business Tasks ChatGPT Handles Easily
+
+Here are five common small business tasks ChatGPT can help you with right now:
+
+### 1. Drafting Emails  
+- Quickly create professional emails for customers, suppliers, or partners.  
+- Example: “Write a polite follow-up email to a client about an unpaid invoice.”
+
+### 2. Creating Social Media Captions  
+- Generate engaging captions for Instagram, Facebook, or LinkedIn posts.  
+- Example: “Write a friendly Instagram caption promoting our new summer sale.”
+
+### 3. Responding to Customer Questions  
+- Craft clear, helpful replies to common customer inquiries.  
+- Example: “Reply to a customer asking about shipping times for our products.”
+
+### 4. Writing Product Descriptions  
+- Produce attractive, easy-to-understand descriptions for your website or online store.  
+- Example: “Describe a handmade leather wallet highlighting its durability and style.”
+
+### 5. Summarizing Meeting Notes  
+- Turn long meeting notes into concise summaries and action points.  
+- Example: “Summarize today’s team meeting focusing on marketing tasks.”
+
+---
+
+## How to Write Prompts That Actually Work
+
+Your results depend on how you ask ChatGPT. Here’s how to get useful, relevant responses every time:
+
+- **Be Specific**: Instead of “Write an email,” say “Write a friendly email to a customer reminding them about their appointment tomorrow.”  
+- **Include Details**: Add names, dates, product info, or tone preferences.  
+- **Ask for Format**: If you want a list, bullet points, or a short paragraph, say so.  
+- **Iterate**: If the first answer isn’t perfect, tweak your prompt and try again.  
+- **Use Examples**: Provide sample text to guide the style or tone.
+
+**Example prompt:**  
+“Write a 3-sentence email to thank a customer named Sarah for her purchase of our eco-friendly tote bag and invite her to leave a review.”
+
+---
+
+## Free vs Paid Tier: What You Need to Know
+
+ChatGPT offers both free and paid versions. Here’s what to consider:
+
+| Feature               | Free Tier                       | Paid Tier (ChatGPT Plus)        |
+|-----------------------|--------------------------------|--------------------------------|
+| Access                | Limited daily usage             | Higher usage limits             |
+| Response Speed        | Standard                       | Faster responses                |
+| Access to Latest Model| Older version (GPT-3.5)         | Newer version (GPT-4)           |
+| Cost                  | Free                           | About $20/month                 |
+
+**What this means for small business owners:**  
+- The **free version** is great for trying out ChatGPT and handling simple tasks like drafting emails or social posts.  
+- The **paid version** is better if you plan to use ChatGPT heavily or need the most advanced, accurate responses.
+
+---
+
+## Common Mistakes to Avoid
+
+To get the best from ChatGPT, avoid these pitfalls:
+
+- **Vague Prompts**: “Write something about my business” is too broad. Be clear and focused.  
+- **Copy-Pasting Without Review**: Always read and edit ChatGPT’s output before sending it out. It can make mistakes or sound generic.  
+- **Over-Reliance**: Use ChatGPT as a tool, not a replacement for your voice and expertise.  
+- **Ignoring Privacy**: Don’t share sensitive or confidential information in your prompts.  
+- **Expecting Perfection**: ChatGPT is helpful but not flawless. Treat it as a starting point.
+
+---
+
+## Next Step: Learn More with Her Handshake’s Free Chapter
+
+If you want a structured, step-by-step way to master ChatGPT for your business, we recommend the **free chapter from Her Handshake**. It’s designed specifically for small business owners like you—no tech skills needed.
+
+You’ll learn:  
+- How to create effective prompts tailored to your business  
+- Ways to integrate ChatGPT into your daily workflow  
+- Tips to avoid errors and keep your content authentic
+
+Download the free chapter [here](#) and start turning AI technology into your business advantage today.
+
+---
+
+ChatGPT can save you time, boost your marketing, and improve customer communication—with zero technical hassle. Use this guide to get started confidently and make AI work for your small business.
+</code></pre>
+  <div class="cta-box">
+    <h3>WANT MORE LIKE THIS?</h3>
+    <p>Get the free chapter from the AI Playbook for Small Business — 7 practical prompts you can use this week.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKZHWIMPTsk4ITlY1XPZoUgtc2iMlVvI-bu9gfX6BcxSTrwg/viewform" class="cta-btn">GET THE FREE CHAPTER &rarr;</a>
+    <p class="cta-guarantee">Free &middot; Instant delivery to your inbox &middot; No credit card</p>
+  </div>
+</article>
+
+<footer>
+  <p>&copy; 2026 AI Playbook &middot; <a href="https://ai-playbook-sales.vercel.app">Home</a> &middot; <a href="/blog.html">Blog</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p>
+</footer>
+
+</body>
+</html>
